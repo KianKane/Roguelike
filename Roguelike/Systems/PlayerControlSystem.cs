@@ -13,7 +13,8 @@ namespace Roguelike.Systems
             {
                 return new Dictionary<string, Type[]>()
                 {
-                    {"players", new Type[] {typeof(PositionComponent), typeof(PlayerComponent)} }
+                    {"players", new Type[] {typeof(PositionComponent), typeof(PlayerComponent)} },
+                    {"tilemaps", new Type[] {typeof(TileMapComponent)} }
                 };
             }
         }
@@ -41,12 +42,22 @@ namespace Roguelike.Systems
                     direction = Point.left;
             } while (direction == Point.zero);
 
-            // Move player(s)
-            foreach (Entity player in entitySets["players"])
-            {
-                PositionComponent position = player.GetComponent<PositionComponent>();
-                player.SetComponent(new PositionComponent(new Point(position.point.X + direction.X, position.point.Y + direction.Y)));
-            }
+            // Get player
+            Entity player = entitySets["players"][0];
+            Point playerPoint = player.GetComponent<PositionComponent>().point;
+
+            // Get tile player will be standing on
+            TileMapComponent tileMap = entitySets["tilemaps"][0].GetComponent<TileMapComponent>();
+            Point newPoint = new Point(playerPoint.X + direction.X, playerPoint.Y + direction.Y);
+            Tile tile;
+            if (newPoint.X >= 0 && newPoint.X < tileMap.size.X && newPoint.Y >= 0 && newPoint.Y < tileMap.size.Y)
+                tile = tileMap.map[newPoint.X, newPoint.Y];
+            else
+                tile = tileMap.outOfBounds;
+
+            // Move player if tile is walkable
+            if (tile.Walkable)
+                player.SetComponent(new PositionComponent(newPoint));
         }
     }
 }

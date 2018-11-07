@@ -11,7 +11,7 @@ namespace Roguelike
         {
             tiles = new Dictionary<string, Tile>(){
                 {"floor", new Tile(true, '.')},
-                {"wall", new Tile(true, '#')}
+                {"wall", new Tile(false, '#')}
             };
         }
 
