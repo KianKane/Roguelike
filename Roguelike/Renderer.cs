@@ -36,7 +36,7 @@ namespace Roguelike
 
         public void Clear(char c)
         {
-            for (int y = 0; y < ViewHeight; y++)
+            for (int y = ViewHeight - 1; y >= 0 ; y--)
             {
                 for (int x = 0; x < ViewWidth; x++)
                 {
