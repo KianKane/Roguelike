@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Roguelike.Components;
+using Roguelike.EntityComponentSystem;
+using Roguelike.Systems;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace Roguelike
@@ -11,9 +14,14 @@ namespace Roguelike
         static void Main(string[] args)
         {
             Renderer renderer = new Renderer(VIEW_WIDTH, VIEW_HEIGHT);
+
+            ECS ecs = new ECS();
+            ecs.AddSystem(new EntityRenderSystem(renderer));
+
             while (true)
             {
                 renderer.Clear('.');
+                ecs.Step();
                 renderer.Render();
                 Thread.Sleep(500);
             }
