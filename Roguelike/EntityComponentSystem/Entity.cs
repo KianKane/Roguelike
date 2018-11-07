@@ -16,6 +16,11 @@ namespace Roguelike.EntityComponentSystem
             }
         }
 
+        public bool HasComponent<T>() where T : IComponent
+        {
+            return Components.ContainsKey(typeof(T));
+        }
+
         public T GetComponent<T>() where T : IComponent
         {
             return (T)Components[typeof(T)];
