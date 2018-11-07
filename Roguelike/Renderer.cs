@@ -32,7 +32,7 @@ namespace Roguelike
 
         public void Draw(Point point, char c)
         {
-            if (point.X > 0 && point.X < ViewWidth && point.Y > 0 && point.Y < ViewHeight)
+            if (point.X >= 0 && point.X < ViewWidth && point.Y >= 0 && point.Y < ViewHeight)
                 toDraw[point.X, point.Y] = c;
         }
 
