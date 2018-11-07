@@ -10,8 +10,8 @@ namespace Roguelike
         static void Main(string[] args)
         {
             ECS ecs = new ECS();
-            ecs.AddSystem(new PlayerControlSystem());
             ecs.AddSystem(new EntityRenderSystem());
+            ecs.AddSystem(new PlayerControlSystem());
 
             ecs.AddEntity(new Entity(new List<IComponent> {
                 new PlayerComponent(),
