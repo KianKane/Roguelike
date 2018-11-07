@@ -13,6 +13,7 @@ namespace Roguelike
             ecs.AddSystem(new TileMapRenderSystem());
             ecs.AddSystem(new EntityRenderSystem());
             ecs.AddSystem(new PlayerControlSystem());
+            ecs.AddSystem(new CameraFollowSystem());
 
             // Player
             ecs.AddEntity(new Entity(new List<IComponent> {
