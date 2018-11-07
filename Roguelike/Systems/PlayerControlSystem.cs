@@ -45,7 +45,7 @@ namespace Roguelike.Systems
             foreach (Entity player in entitySets["players"])
             {
                 Position position = player.GetComponent<Position>();
-                player.SetComponent(new Position(new Point(position.position.X + direction.X, position.position.Y + direction.Y)));
+                player.SetComponent(new Position(new Point(position.point.X + direction.X, position.point.Y + direction.Y)));
             }
         }
     }

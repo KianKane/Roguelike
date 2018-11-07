@@ -31,7 +31,7 @@ namespace Roguelike.Systems
             {
                 Position position = entity.GetComponent<Position>();
                 Visible visible = entity.GetComponent<Visible>();
-                renderer.Draw(position.position, visible.symbol);
+                renderer.Draw(position.point, visible.symbol);
             }
         }
     }
