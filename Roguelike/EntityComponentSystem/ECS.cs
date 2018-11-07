@@ -18,7 +18,7 @@ namespace Roguelike.EntityComponentSystem
         {
             foreach (ECSSystem system in systems)
             {
-                system.Run(FilterEntities(system.ComponentSet));
+                system.Run(FilterEntities(system.ComponentSets));
             }
         }
 
@@ -32,18 +32,22 @@ namespace Roguelike.EntityComponentSystem
             entities.Add(entity);
         }
 
-        private List<Entity> FilterEntities(Type[] componentSet)
+        private Dictionary<string, List<Entity>> FilterEntities(Dictionary<string, Type[]> componentSets)
         {
-            List<Entity> filtered = new List<Entity>();
-            foreach (Entity entity in entities)
+            Dictionary<string, List<Entity>> filtered = new Dictionary<string, List<Entity>>();
+            foreach (string key in componentSets.Keys)
             {
-                foreach (Type type in componentSet)
+                filtered.Add(key, new List<Entity>());
+                foreach (Entity entity in entities)
                 {
-                    if (!entity.HasComponent(type))
-                        goto nextEntity;
+                    foreach (Type type in componentSets[key])
+                    {
+                        if (!entity.HasComponent(type))
+                            goto nextEntity;
+                    }
+                    filtered[key].Add(entity);
+                    nextEntity:;
                 }
-                filtered.Add(entity);
-                nextEntity:;
             }
             return filtered;
         }

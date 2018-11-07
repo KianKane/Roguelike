@@ -7,11 +7,14 @@ namespace Roguelike.Systems
 {
     public class EntityRenderSystem : ECSSystem
     {
-        public override Type[] ComponentSet
+        public override Dictionary<string, Type[]> ComponentSets
         {
             get
             {
-                return new Type[] { typeof(Position), typeof(Visible) };
+                return new Dictionary<string, Type[]>()
+                {
+                    {"entities", new Type[] {typeof(Position), typeof(Visible)} }
+                };
             }
         }
 
@@ -22,9 +25,9 @@ namespace Roguelike.Systems
             this.renderer = renderer;
         }
 
-        public override void Run(List<Entity> entities)
+        public override void Run(Dictionary<string, List<Entity>> entitySets)
         {
-            foreach (Entity entity in entities)
+            foreach (Entity entity in entitySets["entities"])
             {
                 Position position = entity.GetComponent<Position>();
                 Visible visible = entity.GetComponent<Visible>();

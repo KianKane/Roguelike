@@ -7,15 +7,18 @@ namespace Roguelike.Systems
 {
     public class PlayerControlSystem : ECSSystem
     {
-        public override Type[] ComponentSet
+        public override Dictionary<string, Type[]> ComponentSets
         {
             get
             {
-                return new Type[] { typeof(Position), typeof(Player) };
+                return new Dictionary<string, Type[]>()
+                {
+                    {"players", new Type[] {typeof(Position), typeof(Player)} }
+                };
             }
         }
 
-        public override void Run(List<Entity> entities)
+        public override void Run(Dictionary<string, List<Entity>> entitySets)
         {
             // Clear readkey buffer
             while (Console.KeyAvailable)
@@ -39,7 +42,7 @@ namespace Roguelike.Systems
             } while (direction == Point.zero);
 
             // Move player(s)
-            foreach (Entity player in entities)
+            foreach (Entity player in entitySets["players"])
             {
                 Position position = player.GetComponent<Position>();
                 player.SetComponent(new Position(new Point(position.position.X + direction.X, position.position.Y + direction.Y)));

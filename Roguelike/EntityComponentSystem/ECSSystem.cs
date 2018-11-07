@@ -5,8 +5,8 @@ namespace Roguelike.EntityComponentSystem
 {
     public abstract class ECSSystem
     {
-        public abstract Type[] ComponentSet { get; }
+        public abstract Dictionary<string, Type[]> ComponentSets { get; }
 
-        public abstract void Run(List<Entity> entities);
+        public abstract void Run(Dictionary<string, List<Entity>> entitySets);
     }
 }
