@@ -26,44 +26,17 @@ namespace Roguelike.Systems
             Point cameraPosition = camera.GetComponent<PositionComponent>().point;
             Point cameraSize = camera.GetComponent<CameraComponent>().viewSize;
 
-            // Set up console
-            Console.SetWindowSize(cameraSize.X + 1, cameraSize.Y + 1);
-            Console.SetBufferSize(cameraSize.X + 1, cameraSize.Y + 1);
-            Console.CursorVisible = false;
-
-            // Set up buffer
-            char[,] buffer = new char[cameraSize.X, cameraSize.Y];
-            for (int x = 0; x < cameraSize.X; x++)
-            {
-                for (int y = 0; y < cameraSize.Y; y++)
-                {
-                    buffer[x, y] = '.';
-                }
-            }
-
-            // Draw entities to buffer
+            // Draw entities to console
             foreach (Entity entity in entitySets["entities"])
             {
                 Point point = ToCameraSpace(entity.GetComponent<PositionComponent>().point, cameraPosition, cameraSize);
                 char symbol = entity.GetComponent<VisibleComponent>().symbol;
                 if (point.X >= 0 && point.X < cameraSize.X && point.Y >= 0 && point.Y < cameraSize.Y)
                 {
-                    buffer[point.X, point.Y] = symbol;
+                    Console.SetCursorPosition(point.X, cameraSize.Y - 1 - point.Y);
+                    Console.Write(symbol);
                 }
             }
-
-            // Output buffer
-            string output = "";
-            for (int y = cameraSize.Y - 1; y >= 0; y--)
-            {
-                for (int x = 0; x < cameraSize.X; x++)
-                {
-                    output += buffer[x, y];
-                }
-                output += '\n';
-            }
-            Console.SetCursorPosition(0, 0);
-            Console.Write(output);
         }
 
         private Point ToCameraSpace(Point point, Point cameraPosition, Point cameraSize)
