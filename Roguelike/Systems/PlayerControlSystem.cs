@@ -23,14 +23,14 @@ namespace Roguelike.Systems
             // Clear readkey buffer
             while (Console.KeyAvailable)
             {
-                Console.ReadKey(false);
+                Console.ReadKey(true);
             }
 
             // Get direction
             Point direction = Point.zero;
             do
             {
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.W)
                     direction = Point.up;
                 else if (keyInfo.Key == ConsoleKey.DownArrow || keyInfo.Key == ConsoleKey.S)
