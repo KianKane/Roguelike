@@ -30,14 +30,14 @@ namespace Roguelike.Systems
             Point direction = Point.zero;
             do
             {
-                ConsoleKeyInfo key = Console.ReadKey();
-                if (key.Key == ConsoleKey.UpArrow)
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.W)
                     direction = Point.up;
-                else if (key.Key == ConsoleKey.DownArrow)
+                else if (keyInfo.Key == ConsoleKey.DownArrow || keyInfo.Key == ConsoleKey.S)
                     direction = Point.down;
-                else if (key.Key == ConsoleKey.RightArrow)
+                else if (keyInfo.Key == ConsoleKey.RightArrow || keyInfo.Key == ConsoleKey.D)
                     direction = Point.right;
-                else if (key.Key == ConsoleKey.LeftArrow)
+                else if (keyInfo.Key == ConsoleKey.LeftArrow || keyInfo.Key == ConsoleKey.A)
                     direction = Point.left;
             } while (direction == Point.zero);
 
