@@ -20,6 +20,7 @@ namespace Roguelike
             }));
 
             ecs.AddEntity(new Entity(new List<IComponent> {
+                new PositionComponent(new Point(10, 15)),
                 new CameraComponent(new Point(100, 60))
             }));
 
