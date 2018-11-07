@@ -42,7 +42,7 @@ namespace Roguelike.Systems
                 {
                     Point point = ToTileSpace(new Point(x, y), cameraPosition, cameraSize);
                     if (point.X >= 0 && point.X < tileMap.size.X && point.Y >= 0 && point.Y < tileMap.size.Y)
-                        buffer[x, y] = tileMap.map[x, y].Symbol;
+                        buffer[x, y] = tileMap.map[point.X, point.Y].Symbol;
                     else
                         buffer[x, y] = tileMap.outOfBounds.Symbol;
                 }
