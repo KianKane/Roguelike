@@ -39,7 +39,7 @@ namespace Roguelike.EntityComponentSystem
             {
                 foreach (Type type in componentSet)
                 {
-                    if (!entity.Components.ContainsKey(type))
+                    if (!entity.HasComponent(type))
                         goto nextEntity;
                 }
                 filtered.Add(entity);

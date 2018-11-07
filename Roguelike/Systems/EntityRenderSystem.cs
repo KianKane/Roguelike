@@ -26,8 +26,8 @@ namespace Roguelike.Systems
         {
             foreach (Entity entity in entities)
             {
-                Position position = (Position)entity.Components[typeof(Position)];
-                Visible visible = (Visible)entity.Components[typeof(Visible)];
+                Position position = entity.GetComponent<Position>();
+                Visible visible = entity.GetComponent<Visible>();
                 renderer.Draw(position.position, visible.symbol);
             }
         }

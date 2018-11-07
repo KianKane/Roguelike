@@ -5,30 +5,40 @@ namespace Roguelike.EntityComponentSystem
 {
     public sealed class Entity
     {
-        public Dictionary<Type, IComponent> Components { get; }
+        private Dictionary<Type, IComponent> components;
 
         public Entity(List<IComponent> startingComponents)
         {
-            Components = new Dictionary<Type, IComponent>();
-            foreach (IComponent c in startingComponents)
+            components = new Dictionary<Type, IComponent>();
+            foreach (IComponent component in startingComponents)
             {
-                Components.Add(c.GetType(), c);
+                components.Add(component.GetType(), component);
             }
         }
 
         public bool HasComponent<T>() where T : IComponent
         {
-            return Components.ContainsKey(typeof(T));
+            return components.ContainsKey(typeof(T));
+        }
+
+        public bool HasComponent(Type type)
+        {
+            return components.ContainsKey(type);
         }
 
         public T GetComponent<T>() where T : IComponent
         {
-            return (T)Components[typeof(T)];
+            return (T)components[typeof(T)];
         }
 
-        public void SetComponent<T>(T value) where T : IComponent
+        public void SetComponent<T>(T component) where T : IComponent
         {
-            Components[typeof(T)] = value;
+            components[typeof(T)] = component;
+        }
+
+        public void AddComponent<T>(T component) where T : IComponent
+        {
+            components.Add(component.GetType(), component);
         }
     }
 }
