@@ -13,7 +13,7 @@ namespace Roguelike.Systems
             {
                 return new Dictionary<string, Type[]>()
                 {
-                    {"players", new Type[] {typeof(Position), typeof(Player)} }
+                    {"players", new Type[] {typeof(PositionComponent), typeof(PlayerComponent)} }
                 };
             }
         }
@@ -44,8 +44,8 @@ namespace Roguelike.Systems
             // Move player(s)
             foreach (Entity player in entitySets["players"])
             {
-                Position position = player.GetComponent<Position>();
-                player.SetComponent(new Position(new Point(position.point.X + direction.X, position.point.Y + direction.Y)));
+                PositionComponent position = player.GetComponent<PositionComponent>();
+                player.SetComponent(new PositionComponent(new Point(position.point.X + direction.X, position.point.Y + direction.Y)));
             }
         }
     }

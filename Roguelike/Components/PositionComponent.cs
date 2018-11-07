@@ -2,11 +2,11 @@
 
 namespace Roguelike.Components
 {
-    public struct Position : IComponent
+    public struct PositionComponent : IComponent
     {
         public Point point;
 
-        public Position(Point point)
+        public PositionComponent(Point point)
         {
             this.point = point;
         }

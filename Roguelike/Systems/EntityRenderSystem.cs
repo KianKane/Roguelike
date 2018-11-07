@@ -13,7 +13,7 @@ namespace Roguelike.Systems
             {
                 return new Dictionary<string, Type[]>()
                 {
-                    {"entities", new Type[] {typeof(Position), typeof(Visible)} }
+                    {"entities", new Type[] {typeof(PositionComponent), typeof(VisibleComponent)} }
                 };
             }
         }
@@ -29,8 +29,8 @@ namespace Roguelike.Systems
         {
             foreach (Entity entity in entitySets["entities"])
             {
-                Position position = entity.GetComponent<Position>();
-                Visible visible = entity.GetComponent<Visible>();
+                PositionComponent position = entity.GetComponent<PositionComponent>();
+                VisibleComponent visible = entity.GetComponent<VisibleComponent>();
                 renderer.Draw(position.point, visible.symbol);
             }
         }

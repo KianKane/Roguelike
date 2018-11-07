@@ -2,7 +2,7 @@
 
 namespace Roguelike.Components
 {
-    public struct Player : IComponent
+    public struct PlayerComponent : IComponent
     {
     }
 }

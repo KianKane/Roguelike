@@ -2,11 +2,11 @@
 
 namespace Roguelike.Components
 {
-    public struct Visible : IComponent
+    public struct VisibleComponent : IComponent
     {
         public char symbol;
 
-        public Visible(char symbol)
+        public VisibleComponent(char symbol)
         {
             this.symbol = symbol;
         }

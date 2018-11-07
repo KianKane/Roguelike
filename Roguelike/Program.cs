@@ -20,9 +20,9 @@ namespace Roguelike
             ecs.AddSystem(new EntityRenderSystem(renderer));
 
             ecs.AddEntity(new Entity(new List<IComponent> {
-                new Player(),
-                new Position(new Point(10, 15)),
-                new Visible('@')
+                new PlayerComponent(),
+                new PositionComponent(new Point(10, 15)),
+                new VisibleComponent('@')
             }));
 
             while (true)
