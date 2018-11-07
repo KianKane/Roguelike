@@ -13,26 +13,55 @@ namespace Roguelike.Systems
             {
                 return new Dictionary<string, Type[]>()
                 {
-                    {"entities", new Type[] {typeof(PositionComponent), typeof(VisibleComponent)} }
+                    {"entities", new Type[] {typeof(PositionComponent), typeof(VisibleComponent)} },
+                    {"cameras", new Type[] {typeof(CameraComponent)} }
                 };
             }
         }
 
-        private Renderer renderer;
-
-        public EntityRenderSystem(Renderer renderer)
-        {
-            this.renderer = renderer;
-        }
-
         public override void Run(Dictionary<string, List<Entity>> entitySets)
         {
+            // Get camera data
+            Entity camera = entitySets["cameras"][0];
+            Point viewSize = camera.GetComponent<CameraComponent>().viewSize;
+
+            // Set console size
+            Console.SetWindowSize(viewSize.X + 1, viewSize.Y + 1);
+            Console.SetBufferSize(viewSize.X + 1, viewSize.Y + 1);
+
+            // Set up buffer
+            char[,] buffer = new char[viewSize.X, viewSize.Y];
+            for (int x = 0; x < viewSize.X; x++)
+            {
+                for (int y = 0; y < viewSize.Y; y++)
+                {
+                    buffer[x, y] = '.';
+                }
+            }
+
+            // Draw entities to buffer
             foreach (Entity entity in entitySets["entities"])
             {
-                PositionComponent position = entity.GetComponent<PositionComponent>();
-                VisibleComponent visible = entity.GetComponent<VisibleComponent>();
-                renderer.Draw(position.point, visible.symbol);
+                Point point = entity.GetComponent<PositionComponent>().point;
+                char symbol = entity.GetComponent<VisibleComponent>().symbol;
+                if (point.X >= 0 && point.X < viewSize.X && point.Y >= 0 && point.Y < viewSize.Y)
+                {
+                    buffer[point.X, point.Y] = symbol;
+                }
             }
+
+            // Output buffer
+            string output = "";
+            for (int y = viewSize.Y - 1; y >= 0; y--)
+            {
+                for (int x = 0; x < viewSize.X; x++)
+                {
+                    output += buffer[x, y];
+                }
+                output += '\n';
+            }
+            Console.SetCursorPosition(0, 0);
+            Console.Write(output);
         }
     }
 }
