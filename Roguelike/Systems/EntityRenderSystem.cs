@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Roguelike.Systems
 {
-    public class EntityRenderSystem : ECSSystem
+    public class EntityRenderSystem : EntityComponentSystem.System
     {
         public override Dictionary<string, Type[]> ComponentSets
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Roguelike.EntityComponentSystem
 {
-    public abstract class ECSSystem
+    public abstract class System
     {
         public abstract Dictionary<string, Type[]> ComponentSets { get; }
 

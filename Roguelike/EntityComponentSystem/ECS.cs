@@ -5,24 +5,24 @@ namespace Roguelike.EntityComponentSystem
 {
     public class ECS
     {
-        private List<ECSSystem> systems;
+        private List<System> systems;
         private List<Entity> entities;
 
         public ECS()
         {
-            systems = new List<ECSSystem>();
+            systems = new List<System>();
             entities = new List<Entity>();
         }
 
         public void Step()
         {
-            foreach (ECSSystem system in systems)
+            foreach (System system in systems)
             {
                 system.Run(FilterEntities(system.ComponentSets));
             }
         }
 
-        public void AddSystem(ECSSystem system)
+        public void AddSystem(System system)
         {
             systems.Add(system);
         }
