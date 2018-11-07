@@ -25,9 +25,10 @@ namespace Roguelike.Systems
             Entity camera = entitySets["cameras"][0];
             Point viewSize = camera.GetComponent<CameraComponent>().viewSize;
 
-            // Set console size
+            // Set up console
             Console.SetWindowSize(viewSize.X + 1, viewSize.Y + 1);
             Console.SetBufferSize(viewSize.X + 1, viewSize.Y + 1);
+            Console.CursorVisible = false;
 
             // Set up buffer
             char[,] buffer = new char[viewSize.X, viewSize.Y];
