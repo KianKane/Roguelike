@@ -16,14 +16,20 @@ namespace Roguelike
             Renderer renderer = new Renderer(VIEW_WIDTH, VIEW_HEIGHT);
 
             ECS ecs = new ECS();
+            ecs.AddSystem(new PlayerControlSystem());
             ecs.AddSystem(new EntityRenderSystem(renderer));
+
+            ecs.AddEntity(new Entity(new List<IComponent> {
+                new Player(),
+                new Position(new Point(10, 15)),
+                new Visible('@')
+            }));
 
             while (true)
             {
                 renderer.Clear('.');
                 ecs.Step();
                 renderer.Render();
-                Thread.Sleep(500);
             }
         }
     }
