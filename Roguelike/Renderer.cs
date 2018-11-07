@@ -19,6 +19,22 @@ namespace Roguelike
             toDraw = new char[ViewWidth, ViewHeight];
         }
 
+        public void Clear(char c)
+        {
+            for (int y = 0; y < ViewHeight; y++)
+            {
+                for (int x = 0; x < ViewWidth; x++)
+                {
+                    toDraw[x, y] = c;
+                }
+            }
+        }
+
+        public void Draw(Point point, char c)
+        {
+            toDraw[point.X, point.Y] = c;
+        }
+
         public void Render()
         {
             string output = "";
@@ -32,22 +48,6 @@ namespace Roguelike
             }
             Console.SetCursorPosition(0, 0);
             Console.Write(output);
-        }
-
-        public void Clear(char c)
-        {
-            for (int y = 0; y < ViewHeight; y++)
-            {
-                for (int x = 0; x < ViewWidth; x++)
-                {
-                    toDraw[x, y] = c;
-                }
-            }
-        }
-
-        public void DrawChar(int x, int y, char c)
-        {
-            toDraw[x, y] = c;
         }
     }
 }
