@@ -15,5 +15,15 @@ namespace Roguelike.EntityComponentSystem
                 Components.Add(c.GetType(), c);
             }
         }
+
+        public T GetComponent<T>() where T : IComponent
+        {
+            return (T)Components[typeof(T)];
+        }
+
+        public void SetComponent<T>(T value) where T : IComponent
+        {
+            Components[typeof(T)] = value;
+        }
     }
 }
