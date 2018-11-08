@@ -1,7 +1,4 @@
-﻿using Roguelike.Components;
-using Roguelike.EntityComponentSystem;
-using Roguelike.Systems;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Roguelike
 {
@@ -9,33 +6,18 @@ namespace Roguelike
     {
         static void Main(string[] args)
         {
-            ECS ecs = new ECS();
-            ecs.AddSystem(new TileMapRenderSystem());
-            ecs.AddSystem(new EntityRenderSystem());
-            ecs.AddSystem(new PlayerControlSystem());
-            ecs.AddSystem(new CameraFollowSystem());
-
-            // Player
-            ecs.AddEntity(new Entity(new List<IComponent> {
-                new PlayerComponent(),
-                new PositionComponent(new Point(10, 15)),
-                new VisibleComponent('@')
-            }));
-
-            // Camera
-            ecs.AddEntity(new Entity(new List<IComponent> {
-                new PositionComponent(new Point(10, 15)),
-                new CameraComponent(new Point(100, 60))
-            }));
-
-            // Map
-            ecs.AddEntity(new Entity(new List<IComponent> {
-                new TileMapGenerator().Generate(new Point(200, 200))
-            }));
-
+            Camera camera = new Camera(new Point(0, 0), new Point(100, 60));
+            Map map = new Map(new Point(150, 90));
+            Entity player = new Player { Position = Point.zero };
             while (true)
             {
-                ecs.Step();
+                camera.ConfigureConsole();
+                map.DrawMap(camera);
+                IAction action = player.TakeTurn();
+                action?.Execute();
+                Console.SetCursorPosition(player.Position.X, camera.Size.Y - player.Position.Y);
+                Console.Write('@');
+                Console.ReadKey(true);
             }
         }
     }
