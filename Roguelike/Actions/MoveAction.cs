@@ -1,19 +1,27 @@
-﻿namespace Roguelike
+﻿using Roguelike.Behaviours;
+using Roguelike.EntityBehaviourAction;
+
+namespace Roguelike
 {
     public class MoveAction : IAction
     {
-        private Entity entity;
-        private Point direction;
+        public Entity Entity { get; set; }
+        public Point Direction { get; set; }
 
         public MoveAction(Entity entity, Point direction)
         {
-            this.entity = entity;
-            this.direction = direction;
+            Entity = entity;
+            Direction = direction;
         }
 
         public void Execute()
         {
-            entity.Position = new Point(entity.Position.X + direction.X, entity.Position.Y + direction.Y);
+            Physical physical = Entity.GetBehaviour<Physical>();
+
+            if (physical == null)
+                return;
+
+            physical.Position += Direction;
         }
     }
 }
