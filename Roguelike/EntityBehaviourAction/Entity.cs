@@ -5,30 +5,31 @@ namespace Roguelike.EntityBehaviourAction
 {
     public class Entity
     {
-        private List<IBehaviour> behaviours;
+        private List<Behaviour> behaviours;
 
-        public Entity(params IBehaviour[] startingBehaviours)
+        public Entity(params Behaviour[] startingBehaviours)
         {
-            behaviours = new List<IBehaviour>();
-            foreach (IBehaviour behaviour in startingBehaviours)
+            behaviours = new List<Behaviour>();
+            foreach (Behaviour behaviour in startingBehaviours)
             {
                 AddBehaviour(behaviour);
             }
         }
 
-        public T GetBehaviour<T>() where T : IBehaviour
+        public T GetBehaviour<T>() where T : Behaviour
         {
             return behaviours.OfType<T>().FirstOrDefault();
         }
 
-        public void AddBehaviour(IBehaviour behaviour)
+        public void AddBehaviour(Behaviour behaviour)
         {
             behaviours.Add(behaviour);
+            behaviour.SetParent(this);
         }
 
-        public void HandleAction(IAction action)
+        public void HandleAction(Action action)
         {
-            foreach (IBehaviour behaviour in behaviours)
+            foreach (Behaviour behaviour in behaviours)
             {
                 behaviour.HandleAction(action);
             }

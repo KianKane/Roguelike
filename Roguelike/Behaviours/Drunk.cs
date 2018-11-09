@@ -1,9 +1,10 @@
-﻿using Roguelike.EntityBehaviourAction;
-using System;
+﻿using System;
+using Roguelike.EntityBehaviourAction;
+using Action = Roguelike.EntityBehaviourAction.Action;
 
 namespace Roguelike.Behaviours
 {
-    public class Drunk : IBehaviour
+    public class Drunk : Behaviour
     {
         Random random;
 
@@ -12,26 +13,25 @@ namespace Roguelike.Behaviours
             random = new Random();
         }
 
-        public void HandleAction(IAction action)
+        public override void HandleAction(Action action)
         {
-            if (action is MoveAction)
+            if (action.ID == "before_move" && action.Parameters["entity"] == Parent)
             {
-                MoveAction moveAction = action as MoveAction;
                 if (random.NextDouble() <= 0.25f)
                 {
                     switch (random.Next(0, 4))
                     {
                         case 0:
-                            moveAction.Direction = Point.up;
+                            action.Parameters["direction"] = Point.up;
                             break;
                         case 1:
-                            moveAction.Direction = Point.down;
+                            action.Parameters["direction"] = Point.down;
                             break;
                         case 2:
-                            moveAction.Direction = Point.left;
+                            action.Parameters["direction"] = Point.left;
                             break;
                         case 3:
-                            moveAction.Direction = Point.right;
+                            action.Parameters["direction"] = Point.right;
                             break;
                     }
                 }

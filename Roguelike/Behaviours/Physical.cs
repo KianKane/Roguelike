@@ -2,7 +2,7 @@
 
 namespace Roguelike.Behaviours
 {
-    public class Physical : IBehaviour
+    public class Physical : Behaviour
     {
         public Map Map { get; set; }
         public Point Position { get; set; }
@@ -15,8 +15,12 @@ namespace Roguelike.Behaviours
             Symbol = symbol;
         }
 
-        public void HandleAction(IAction action)
+        public override void HandleAction(Action action)
         {
+            if (action.ID == "move" && action.Parameters["entity"] == Parent)
+            {
+                Position += (Point)action.Parameters["direction"];
+            }
         }
     }
 }
