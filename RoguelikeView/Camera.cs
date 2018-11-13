@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Roguelike;
+using System;
 
-namespace Roguelike
+namespace RoguelikeView
 {
     public class Camera
     {
@@ -18,16 +19,17 @@ namespace Roguelike
             Console.SetWindowSize(Size.X + 1, Size.Y + 1);
             Console.SetBufferSize(Size.X + 1, Size.Y + 1);
             Console.CursorVisible = false;
+            Console.Clear();
         }
 
-        public Point ToCameraSpace(Point worldSpace)
+        public bool ScreenPointWithinBounds(Point point)
         {
-            return new Point(worldSpace.X - (Center.X - Size.X / 2), worldSpace.Y - (Center.Y - Size.Y / 2));
+            return point.X >= 0 && point.X < Size.X && point.Y >= 0 && point.Y < Size.Y;
         }
 
-        public Point ToWorldSpace(Point cameraSpace)
+        public Point ToScreenSpace(Point worldSpace)
         {
-            return new Point(cameraSpace.X + (Center.X - Size.X / 2), cameraSpace.Y + (Center.Y - Size.Y / 2));
+            return new Point(worldSpace.X - (Center.X - (Size.X / 2)), -worldSpace.Y - (-Center.Y - (Size.Y / 2)));
         }
     }
 }

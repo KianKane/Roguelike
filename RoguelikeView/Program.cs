@@ -1,15 +1,28 @@
-﻿using Roguelike.EntityBehaviourAction;
+﻿using Roguelike;
 using System;
-using Action = Roguelike.EntityBehaviourAction.Action;
 
-namespace Roguelike.Behaviours
+namespace RoguelikeView
 {
-    public class Player : Behaviour
+    public class Program
     {
-        public override void HandleAction(Action action)
+        public static void Main(string[] args)
         {
-            if (action.ID == "player_turn")
+            GameLoop game = new GameLoop();
+            Camera camera = new Camera(new Point(0, 0), new Point(100, 60));
+            while (true)
             {
+                // Draw actors
+                camera.ConfigureConsole();
+                foreach (Actor actor in game.actors)
+                {
+                    Point pointOnScreen = camera.ToScreenSpace(actor.position);
+                    if (camera.ScreenPointWithinBounds(pointOnScreen))
+                    {
+                        Console.SetCursorPosition(pointOnScreen.X, pointOnScreen.Y);
+                        Console.Write(actor.symbol);
+                    }
+                }
+
                 // Clear console input
                 while (Console.KeyAvailable) { Console.ReadKey(true); }
 
@@ -39,10 +52,9 @@ namespace Roguelike.Behaviours
 
                 } while (direction == Point.zero);
 
-                Action moveAction = new Action("move");
-                moveAction.Parameters.Add("entity", Parent);
-                moveAction.Parameters.Add("direction", direction);
-                EntityManager.Fire(moveAction);
+                game.nextAction = new Move(game.hero, direction);
+
+                game.DoTurn();
             }
         }
     }
