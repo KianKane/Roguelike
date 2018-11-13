@@ -41,13 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs" />
-    <Compile Include="GameLoop.cs" />
-    <Compile Include="Hero.cs" />
-    <Compile Include="IAction.cs" />
-    <Compile Include="IDisplayEvent.cs" />
-    <Compile Include="Move.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Actors\Actor.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Actors\Hero.cs" />
+    <Compile Include="Actions\IAction.cs" />
+    <Compile Include="DisplayEvents\IDisplayEvent.cs" />
+    <Compile Include="Actions\Move.cs" />
+    <Compile Include="DataTypes\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

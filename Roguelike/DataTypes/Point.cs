@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Roguelike
+namespace Roguelike.DataTypes
 {
     public struct Point : IEquatable<Point>
     {

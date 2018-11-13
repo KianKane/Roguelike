@@ -1,4 +1,7 @@
-﻿namespace Roguelike
+﻿using Roguelike.Actions;
+using Roguelike.DataTypes;
+
+namespace Roguelike.Actors
 {
     public abstract class Actor
     {

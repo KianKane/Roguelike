@@ -1,4 +1,7 @@
 ﻿using Roguelike;
+using Roguelike.Actions;
+using Roguelike.Actors;
+using Roguelike.DataTypes;
 using System;
 
 namespace RoguelikeView
@@ -7,7 +10,7 @@ namespace RoguelikeView
     {
         public static void Main(string[] args)
         {
-            GameLoop game = new GameLoop();
+            Game game = new Game();
             Camera camera = new Camera(new Point(0, 0), new Point(100, 60));
             while (true)
             {

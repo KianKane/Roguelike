@@ -1,15 +1,17 @@
-﻿using System.Collections;
+﻿using Roguelike.Actions;
+using Roguelike.Actors;
+using Roguelike.DataTypes;
 using System.Collections.Generic;
 
 namespace Roguelike
 {
-    public class GameLoop
+    public class Game
     {
         public Actor hero;
         public IAction nextAction;
         public Queue<Actor> actors;
 
-        public GameLoop()
+        public Game()
         {
             nextAction = null;
             actors = new Queue<Actor>();

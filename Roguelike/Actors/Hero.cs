@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Roguelike.Actions;
+using Roguelike.DataTypes;
 
-namespace Roguelike
+namespace Roguelike.Actors
 {
     public class Hero : Actor
     {

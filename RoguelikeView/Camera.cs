@@ -1,4 +1,4 @@
-﻿using Roguelike;
+﻿using Roguelike.DataTypes;
 using System;
 
 namespace RoguelikeView

@@ -1,4 +1,7 @@
-﻿namespace Roguelike
+﻿using Roguelike.Actors;
+using Roguelike.DataTypes;
+
+namespace Roguelike.Actions
 {
     public class Move : IAction
     {

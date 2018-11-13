@@ -1,4 +1,4 @@
-﻿namespace Roguelike
+﻿namespace Roguelike.DisplayEvents
 {
     public interface IDisplayEvent
     {
