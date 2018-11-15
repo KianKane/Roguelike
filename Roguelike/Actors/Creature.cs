@@ -11,7 +11,7 @@ namespace Roguelike.Actors
 
         public override IAction GetAction(Game game)
         {
-            return new Move(this, Point.up);
+            return new Move(Point.up);
         }
     }
 }

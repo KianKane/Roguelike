@@ -29,7 +29,7 @@ namespace Roguelike
             {
                 Actor current = ActorTurnQueue.Peek();
                 IAction action = current.GetAction(this);
-                if (action != null && action.Execute())
+                if (action != null && action.Execute(this, current))
                 {
                     ActorTurnQueue.Dequeue();
                     ActorTurnQueue.Enqueue(current);

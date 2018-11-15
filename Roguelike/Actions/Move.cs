@@ -5,16 +5,14 @@ namespace Roguelike.Actions
 {
     public class Move : IAction
     {
-        private Actor actor;
         private Point direction;
 
-        public Move(Actor actor, Point direction)
+        public Move(Point direction)
         {
-            this.actor = actor;
             this.direction = direction;
         }
 
-        public bool Execute()
+        public bool Execute(Game game, Actor actor)
         {
             actor.position += direction;
             return true;

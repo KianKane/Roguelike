@@ -57,7 +57,7 @@ namespace RoguelikeView
 
                     } while (direction == Point.zero);
 
-                    game.NextHeroAction = new Move(game.Hero, direction);
+                    game.NextHeroAction = new Move(direction);
                 }
                 game.DoTurn();
             }
