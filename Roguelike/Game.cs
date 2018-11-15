@@ -1,6 +1,7 @@
 ﻿using Roguelike.Actions;
 using Roguelike.Actors;
 using Roguelike.DataTypes;
+using System;
 using System.Collections.Generic;
 
 namespace Roguelike
@@ -10,6 +11,8 @@ namespace Roguelike
         public IAction NextHeroAction { get; set; }
         public Actor Hero { get; private set; }
         public Queue<Actor> ActorTurnQueue { get; private set; }
+
+        internal Random RNG { get; private set; }
 
         public Game()
         {
@@ -21,7 +24,9 @@ namespace Roguelike
             ActorTurnQueue.Enqueue(new Creature(new Point(-10, 10)));
             ActorTurnQueue.Enqueue(new Creature(new Point(10, -10)));
             ActorTurnQueue.Enqueue(new Creature(new Point(-10, -10)));
-        }
+
+            RNG = new Random();
+    }
 
         public void DoTurn()
         {
