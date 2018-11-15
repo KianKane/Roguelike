@@ -3,15 +3,15 @@ using Roguelike.DataTypes;
 
 namespace Roguelike.Actors
 {
-    public class Hero : Actor
+    public class Creature : Actor
     {
-        public Hero(Point position) : base(position, '@')
+        public Creature(Point position) : base(position, '!')
         {
         }
 
         public override IAction GetAction(Game game)
         {
-            return null;
+            return new Move(this, Point.up);
         }
     }
 }

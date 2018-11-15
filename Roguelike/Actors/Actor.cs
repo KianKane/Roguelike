@@ -14,6 +14,6 @@ namespace Roguelike.Actors
             this.symbol = symbol;
         }
 
-        public abstract IAction GetAction();
+        public abstract IAction GetAction(Game game);
     }
 }

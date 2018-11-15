@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\Actor.cs" />
+    <Compile Include="Actors\Creature.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Actors\Hero.cs" />
     <Compile Include="Actions\IAction.cs" />

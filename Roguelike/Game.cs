@@ -17,6 +17,10 @@ namespace Roguelike
             actors = new Queue<Actor>();
             hero = new Hero(Point.zero);
             actors.Enqueue(hero);
+            actors.Enqueue(new Creature(new Point(10, 10)));
+            actors.Enqueue(new Creature(new Point(-10, 10)));
+            actors.Enqueue(new Creature(new Point(10, -10)));
+            actors.Enqueue(new Creature(new Point(-10, -10)));
         }
 
         public void DoTurn()
@@ -33,7 +37,7 @@ namespace Roguelike
                 }
                 else
                 {
-                    action = current.GetAction();
+                    action = current.GetAction(this);
                 }
 
                 if (action != null && action.Execute())
