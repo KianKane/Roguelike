@@ -11,7 +11,9 @@ namespace Roguelike.Actors
 
         public override IAction GetAction(Game game)
         {
-            return null;
+            IAction action = game.NextHeroAction;
+            game.NextHeroAction = null;
+            return action;
         }
     }
 }

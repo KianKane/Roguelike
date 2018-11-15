@@ -16,7 +16,7 @@ namespace RoguelikeView
             {
                 // Draw actors
                 camera.ConfigureConsole();
-                foreach (Actor actor in game.actors)
+                foreach (Actor actor in game.Actors)
                 {
                     Point pointOnScreen = camera.ToScreenSpace(actor.position);
                     if (camera.ScreenPointWithinBounds(pointOnScreen))
@@ -55,7 +55,7 @@ namespace RoguelikeView
 
                 } while (direction == Point.zero);
 
-                game.nextAction = new Move(game.hero, direction);
+                game.NextHeroAction = new Move(game.Hero, direction);
 
                 game.DoTurn();
             }

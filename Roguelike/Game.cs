@@ -7,43 +7,32 @@ namespace Roguelike
 {
     public class Game
     {
-        public Actor hero;
-        public IAction nextAction;
-        public Queue<Actor> actors;
+        public IAction NextHeroAction { get; set; }
+        public Actor Hero { get; private set; }
+        public Queue<Actor> Actors { get; private set; }
 
         public Game()
         {
-            nextAction = null;
-            actors = new Queue<Actor>();
-            hero = new Hero(Point.zero);
-            actors.Enqueue(hero);
-            actors.Enqueue(new Creature(new Point(10, 10)));
-            actors.Enqueue(new Creature(new Point(-10, 10)));
-            actors.Enqueue(new Creature(new Point(10, -10)));
-            actors.Enqueue(new Creature(new Point(-10, -10)));
+            NextHeroAction = null;
+            Actors = new Queue<Actor>();
+            Hero = new Hero(Point.zero);
+            Actors.Enqueue(Hero);
+            Actors.Enqueue(new Creature(new Point(10, 10)));
+            Actors.Enqueue(new Creature(new Point(-10, 10)));
+            Actors.Enqueue(new Creature(new Point(10, -10)));
+            Actors.Enqueue(new Creature(new Point(-10, -10)));
         }
 
         public void DoTurn()
         {
-            if(actors.Count > 0)
+            if(Actors.Count > 0)
             {
-                Actor current = actors.Peek();
-
-                IAction action;
-                if (current == hero)
-                {
-                    action = nextAction;
-                    nextAction = null;
-                }
-                else
-                {
-                    action = current.GetAction(this);
-                }
-
+                Actor current = Actors.Peek();
+                IAction action = current.GetAction(this);
                 if (action != null && action.Execute())
                 {
-                    actors.Dequeue();
-                    actors.Enqueue(current);
+                    Actors.Dequeue();
+                    Actors.Enqueue(current);
                 }
             }
         }
