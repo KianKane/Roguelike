@@ -14,49 +14,51 @@ namespace RoguelikeView
             Camera camera = new Camera(new Point(0, 0), new Point(100, 60));
             while (true)
             {
-                // Draw actors
-                camera.ConfigureConsole();
-                foreach (Actor actor in game.Actors)
+                if (game.ActorTurnQueue.TryPeek(out Actor nextActor) && nextActor == game.Hero)
                 {
-                    Point pointOnScreen = camera.ToScreenSpace(actor.position);
-                    if (camera.ScreenPointWithinBounds(pointOnScreen))
+                    // Draw actors
+                    camera.ConfigureConsole();
+                    foreach (Actor actor in game.ActorTurnQueue)
                     {
-                        Console.SetCursorPosition(pointOnScreen.X, pointOnScreen.Y);
-                        Console.Write(actor.symbol);
+                        Point pointOnScreen = camera.ToScreenSpace(actor.position);
+                        if (camera.ScreenPointWithinBounds(pointOnScreen))
+                        {
+                            Console.SetCursorPosition(pointOnScreen.X, pointOnScreen.Y);
+                            Console.Write(actor.symbol);
+                        }
                     }
+
+                    // Clear console input
+                    while (Console.KeyAvailable) { Console.ReadKey(true); }
+
+                    // Get direction
+                    Point direction = Point.zero;
+                    do
+                    {
+                        switch (Console.ReadKey(true).Key)
+                        {
+                            case ConsoleKey.W:
+                            case ConsoleKey.UpArrow:
+                                direction = Point.up;
+                                break;
+                            case ConsoleKey.S:
+                            case ConsoleKey.DownArrow:
+                                direction = Point.down;
+                                break;
+                            case ConsoleKey.D:
+                            case ConsoleKey.RightArrow:
+                                direction = Point.right;
+                                break;
+                            case ConsoleKey.A:
+                            case ConsoleKey.LeftArrow:
+                                direction = Point.left;
+                                break;
+                        }
+
+                    } while (direction == Point.zero);
+
+                    game.NextHeroAction = new Move(game.Hero, direction);
                 }
-
-                // Clear console input
-                while (Console.KeyAvailable) { Console.ReadKey(true); }
-
-                // Get direction
-                Point direction = Point.zero;
-                do
-                {
-                    switch (Console.ReadKey(true).Key)
-                    {
-                        case ConsoleKey.W:
-                        case ConsoleKey.UpArrow:
-                            direction = Point.up;
-                            break;
-                        case ConsoleKey.S:
-                        case ConsoleKey.DownArrow:
-                            direction = Point.down;
-                            break;
-                        case ConsoleKey.D:
-                        case ConsoleKey.RightArrow:
-                            direction = Point.right;
-                            break;
-                        case ConsoleKey.A:
-                        case ConsoleKey.LeftArrow:
-                            direction = Point.left;
-                            break;
-                    }
-
-                } while (direction == Point.zero);
-
-                game.NextHeroAction = new Move(game.Hero, direction);
-
                 game.DoTurn();
             }
         }

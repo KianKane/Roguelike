@@ -9,30 +9,30 @@ namespace Roguelike
     {
         public IAction NextHeroAction { get; set; }
         public Actor Hero { get; private set; }
-        public Queue<Actor> Actors { get; private set; }
+        public Queue<Actor> ActorTurnQueue { get; private set; }
 
         public Game()
         {
             NextHeroAction = null;
-            Actors = new Queue<Actor>();
+            ActorTurnQueue = new Queue<Actor>();
             Hero = new Hero(Point.zero);
-            Actors.Enqueue(Hero);
-            Actors.Enqueue(new Creature(new Point(10, 10)));
-            Actors.Enqueue(new Creature(new Point(-10, 10)));
-            Actors.Enqueue(new Creature(new Point(10, -10)));
-            Actors.Enqueue(new Creature(new Point(-10, -10)));
+            ActorTurnQueue.Enqueue(Hero);
+            ActorTurnQueue.Enqueue(new Creature(new Point(10, 10)));
+            ActorTurnQueue.Enqueue(new Creature(new Point(-10, 10)));
+            ActorTurnQueue.Enqueue(new Creature(new Point(10, -10)));
+            ActorTurnQueue.Enqueue(new Creature(new Point(-10, -10)));
         }
 
         public void DoTurn()
         {
-            if(Actors.Count > 0)
+            if(ActorTurnQueue.Count > 0)
             {
-                Actor current = Actors.Peek();
+                Actor current = ActorTurnQueue.Peek();
                 IAction action = current.GetAction(this);
                 if (action != null && action.Execute())
                 {
-                    Actors.Dequeue();
-                    Actors.Enqueue(current);
+                    ActorTurnQueue.Dequeue();
+                    ActorTurnQueue.Enqueue(current);
                 }
             }
         }
