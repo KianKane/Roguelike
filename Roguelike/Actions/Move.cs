@@ -14,7 +14,7 @@ namespace Roguelike.Actions
 
         public bool Execute(Game game, Actor actor)
         {
-            actor.position += direction;
+            actor.Position += direction;
             return true;
         }
     }

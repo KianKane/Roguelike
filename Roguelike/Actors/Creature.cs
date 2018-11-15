@@ -3,13 +3,13 @@ using Roguelike.DataTypes;
 
 namespace Roguelike.Actors
 {
-    public class Creature : Actor
+    public sealed class Creature : Actor
     {
-        public Creature(Point position) : base(position, '!')
+        internal Creature(Point position) : base(position, '!')
         {
         }
 
-        public override IAction GetAction(Game game)
+        internal override IAction GetAction(Game game)
         {
             switch (game.RNG.Next(0, 4))
             {

@@ -3,13 +3,13 @@ using Roguelike.DataTypes;
 
 namespace Roguelike.Actors
 {
-    public class Hero : Actor
+    public sealed class Hero : Actor
     {
-        public Hero(Point position) : base(position, '@')
+        internal Hero(Point position) : base(position, '@')
         {
         }
 
-        public override IAction GetAction(Game game)
+        internal override IAction GetAction(Game game)
         {
             IAction action = game.NextHeroAction;
             game.NextHeroAction = null;

@@ -20,11 +20,11 @@ namespace RoguelikeView
                     camera.ConfigureConsole();
                     foreach (Actor actor in game.ActorTurnQueue)
                     {
-                        Point pointOnScreen = camera.ToScreenSpace(actor.position);
+                        Point pointOnScreen = camera.ToScreenSpace(actor.Position);
                         if (camera.ScreenPointWithinBounds(pointOnScreen))
                         {
                             Console.SetCursorPosition(pointOnScreen.X, pointOnScreen.Y);
-                            Console.Write(actor.symbol);
+                            Console.Write(actor.Symbol);
                         }
                     }
 

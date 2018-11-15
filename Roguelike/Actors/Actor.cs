@@ -5,15 +5,15 @@ namespace Roguelike.Actors
 {
     public abstract class Actor
     {
-        public Point position;
-        public char symbol;
+        public Point Position { get; internal set; }
+        public char Symbol { get; internal set; }
 
-        public Actor(Point position, char symbol)
+        protected internal Actor(Point position, char symbol)
         {
-            this.position = position;
-            this.symbol = symbol;
+            Position = position;
+            Symbol = symbol;
         }
 
-        public abstract IAction GetAction(Game game);
+        internal abstract IAction GetAction(Game game);
     }
 }
