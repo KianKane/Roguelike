@@ -49,6 +49,9 @@
     <Compile Include="DisplayEvents\IDisplayEvent.cs" />
     <Compile Include="Actions\Move.cs" />
     <Compile Include="DataTypes\Point.cs" />
+    <Compile Include="Map\TileMap.cs" />
+    <Compile Include="Map\TileType.cs" />
+    <Compile Include="Map\TileTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

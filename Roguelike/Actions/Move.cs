@@ -14,7 +14,11 @@ namespace Roguelike.Actions
 
         public bool Execute(Game game, Actor actor)
         {
-            actor.Position += direction;
+            Point newPosition = actor.Position + direction;
+            if (game.Map.GetWalkable(newPosition))
+            {
+                actor.Position = newPosition;
+            }
             return true;
         }
     }

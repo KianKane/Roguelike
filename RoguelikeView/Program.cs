@@ -16,8 +16,20 @@ namespace RoguelikeView
             {
                 if (game.ActorTurnQueue.TryPeek(out Actor nextActor) && nextActor == game.Hero)
                 {
-                    // Draw actors
+                    // Configure console
                     camera.ConfigureConsole();
+
+                    // Draw tile map
+                    for (int y = camera.BottomLeft.Y + camera.Size.Y - 1; y >= camera.BottomLeft.Y; y--)
+                    {
+                        for (int x = camera.BottomLeft.X; x < camera.BottomLeft.X + camera.Size.X; x++)
+                        {
+                            Console.Write(game.Map.GetSymbol(new Point(x, y)));
+                        }
+                        Console.WriteLine();
+                    }
+
+                    // Draw actors
                     foreach (Actor actor in game.ActorTurnQueue)
                     {
                         Point pointOnScreen = camera.ToScreenSpace(actor.Position);

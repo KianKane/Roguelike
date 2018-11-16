@@ -1,6 +1,7 @@
 ﻿using Roguelike.Actions;
 using Roguelike.Actors;
 using Roguelike.DataTypes;
+using Roguelike.Map;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ namespace Roguelike
     public class Game
     {
         public IAction NextHeroAction { get; set; }
+        public TileMap Map { get; private set; }
         public Actor Hero { get; private set; }
         public Queue<Actor> ActorTurnQueue { get; private set; }
 
@@ -16,7 +18,10 @@ namespace Roguelike
 
         public Game()
         {
+            RNG = new Random();
+
             NextHeroAction = null;
+            Map = new TileMap(this, new Point(4, 4));
             ActorTurnQueue = new Queue<Actor>();
             Hero = new Hero(Point.zero);
             ActorTurnQueue.Enqueue(Hero);
@@ -24,9 +29,7 @@ namespace Roguelike
             ActorTurnQueue.Enqueue(new Creature(new Point(-10, 10)));
             ActorTurnQueue.Enqueue(new Creature(new Point(10, -10)));
             ActorTurnQueue.Enqueue(new Creature(new Point(-10, -10)));
-
-            RNG = new Random();
-    }
+        }
 
         public void DoTurn()
         {

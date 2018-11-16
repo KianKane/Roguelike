@@ -8,6 +8,8 @@ namespace RoguelikeView
         public Point Center { get; set; }
         public Point Size { get; }
 
+        public Point BottomLeft { get { return Center - (Size / 2); } }
+
         public Camera(Point center, Point size)
         {
             Center = center;
@@ -19,7 +21,7 @@ namespace RoguelikeView
             Console.SetWindowSize(Size.X + 1, Size.Y + 1);
             Console.SetBufferSize(Size.X + 1, Size.Y + 1);
             Console.CursorVisible = false;
-            Console.Clear();
+            Console.SetCursorPosition(0, 0);
         }
 
         public bool ScreenPointWithinBounds(Point point)
